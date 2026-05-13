@@ -30,6 +30,20 @@ public class GlobalExceptionHandler {
                 .body(ApiResponse.error(ErrorCode.VALIDATION_ERROR, errors));
     }
 
+    @ExceptionHandler(TemplateNotFoundException.class)
+    public ResponseEntity<ApiResponse<Void>> handleTemplateNotFound(TemplateNotFoundException ex) {
+        log.warn("Template not found: {}", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(ApiResponse.error(ErrorCode.TEMPLATE_NOT_FOUND));
+    }
+
+    @ExceptionHandler(ReportGenerationException.class)
+    public ResponseEntity<ApiResponse<Void>> handleReportGenerationException(ReportGenerationException ex) {
+        log.error("Report generation failed: {}", ex.getMessage(), ex.getCause());
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(ApiResponse.error(ErrorCode.REPORT_GENERATION_FAILED));
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiResponse<Void>> handleGenericException(Exception ex) {
         log.error("Unexpected error occurred", ex);

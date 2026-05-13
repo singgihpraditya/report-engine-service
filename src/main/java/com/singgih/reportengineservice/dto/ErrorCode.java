@@ -28,6 +28,14 @@ public enum ErrorCode {
             "Business rule violation",
             "Pelanggaran aturan bisnis"),
 
+    TEMPLATE_NOT_FOUND("SGH-004", HttpStatus.NOT_FOUND,
+            "Report template not found",
+            "Template report tidak ditemukan"),
+
+    REPORT_GENERATION_FAILED("SGH-005", HttpStatus.INTERNAL_SERVER_ERROR,
+            "Report generation failed",
+            "Gagal membuat report"),
+
     UNAUTHORIZED("SGH-401", HttpStatus.UNAUTHORIZED,
             "Unauthorized",
             "Tidak diotorisasi"),
