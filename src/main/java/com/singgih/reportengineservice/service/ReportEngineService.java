@@ -10,9 +10,11 @@ import com.singgih.reportengineservice.exception.ReportGenerationException;
 import com.singgih.reportengineservice.exception.TemplateNotFoundException;
 import com.singgih.reportengineservice.repository.ReportHistoryRepository;
 import com.singgih.reportengineservice.repository.ReportTemplateRepository;
+import com.singgih.reportengineservice.config.CacheConfig;
 import com.singgih.reportengineservice.service.report.ReportGeneratorStrategy;
 import com.singgih.reportengineservice.service.report.ReportResourceService;
 import com.singgih.reportengineservice.service.report.TemplateAssemblerService;
+import org.springframework.cache.annotation.CacheEvict;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -136,6 +138,12 @@ public class ReportEngineService {
                 .reportType(type)
                 .cached(cached)
                 .build();
+    }
+
+    /** Menghapus seluruh cache template dari memori. */
+    @CacheEvict(value = CacheConfig.REPORT_TEMPLATES, allEntries = true)
+    public void clearTemplateCache() {
+        log.info("Template cache cleared");
     }
 
     /** Wraps both the file bytes and metadata so the controller gets both in one call. */

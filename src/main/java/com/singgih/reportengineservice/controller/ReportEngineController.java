@@ -51,6 +51,17 @@ public class ReportEngineController {
                 .body(result.resource());
     }
 
+    @DeleteMapping("/clear-cache")
+    @Operation(
+            summary     = "Hapus cache template report",
+            description = "Menghapus semua cache ReportTemplate dari memori. " +
+                          "Cache akan diisi ulang secara otomatis pada request generate berikutnya."
+    )
+    public ResponseEntity<Void> clearCache() {
+        reportEngineService.clearTemplateCache();
+        return ResponseEntity.noContent().build();
+    }
+
     private MediaType resolveMediaType(ReportType type) {
         return switch (type) {
             case PDF  -> MediaType.APPLICATION_PDF;
