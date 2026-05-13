@@ -23,19 +23,15 @@ VALUES (
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8"/>
-  <style>
-    body   { font-family: Arial, sans-serif; font-size: 12px; margin: 30px; }
-    hr     { border: 1px solid #333; }
-    table  { width: 100%; border-collapse: collapse; margin-top: 10px; }
-    th, td { border: 1px solid #999; padding: 6px 10px; text-align: left; }
-    th     { background-color: #e0e0e0; font-weight: bold; }
-    .header, .footer { text-align: center; }
-  </style>
+  <style th:utext="${style_css}">/* default */</style>
 </head>
 <body>
   <div class="header">
     <hr/>
-    <h2>PT Maju Sentosa</h2>
+    <p>
+      <img th:src="${logo_ms}" class="logo-img" alt="MS"/>
+      <span class="company-name">PT Maju Sentosa</span>
+    </p>
     <hr/>
   </div>
 
@@ -65,7 +61,10 @@ VALUES (
 <body>
   <div class="header">
     <hr/>
-    <h2>PT Maju Sentosa</h2>
+    <p>
+      <img th:src="${logo_ms}" class="logo-img" alt="MS"/>
+      <span class="company-name">PT Maju Sentosa</span>
+    </p>
     <hr/>
   </div>
 

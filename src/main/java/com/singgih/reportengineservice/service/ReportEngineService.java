@@ -11,6 +11,7 @@ import com.singgih.reportengineservice.exception.TemplateNotFoundException;
 import com.singgih.reportengineservice.repository.ReportHistoryRepository;
 import com.singgih.reportengineservice.repository.ReportTemplateRepository;
 import com.singgih.reportengineservice.service.report.ReportGeneratorStrategy;
+import com.singgih.reportengineservice.service.report.ReportResourceService;
 import com.singgih.reportengineservice.service.report.TemplateAssemblerService;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
@@ -43,6 +44,7 @@ public class ReportEngineService {
     private final TemplateAssemblerService assembler;
     private final ReportStorageProperties storageProperties;
     private final List<ReportGeneratorStrategy> generators;
+    private final ReportResourceService resourceService;
 
     private Map<ReportType, ReportGeneratorStrategy> generatorMap;
 
@@ -114,11 +116,13 @@ public class ReportEngineService {
         historyRepository.save(history);
     }
 
-    /** Adds system-level variables (print_date, dll) tanpa mengubah params dari request user. */
+    /** Adds system-level variables (print_date, style_css, logo_ms) tanpa mengubah params dari request user. */
     private Map<String, Object> mergeWithSystemParams(Map<String, Object> requestParams) {
         Map<String, Object> merged = new HashMap<>(requestParams);
         merged.put("print_date", LocalDateTime.now()
                 .format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")));
+        merged.put("style_css", resourceService.getCssContent());
+        merged.put("logo_ms",   resourceService.getLogoDataUri());
         return merged;
     }
 

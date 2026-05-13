@@ -1,0 +1,9 @@
+body   { font-family: Arial, sans-serif; font-size: 12px; margin: 30px; }
+hr     { border: 1px solid #333; }
+table  { width: 100%; border-collapse: collapse; margin-top: 10px; }
+th, td { border: 1px solid #999; padding: 6px 10px; text-align: left; }
+th     { background-color: #e0e0e0; font-weight: bold; }
+.header { text-align: center; }
+.footer { text-align: center; }
+.logo-img     { width: 36px; height: 36px; vertical-align: middle; }
+.company-name { font-size: 18px; font-weight: bold; vertical-align: middle; margin-left: 8px; }
